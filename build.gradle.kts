@@ -14,5 +14,5 @@ dependencies {
     testImplementation(libs.kotest.assertions.core)
 }
 application {
-    mainClass.set("no.nav.dagpenger.regel.behovloser.AppKt")
+    mainClass.set("no.nav.dagpenger.regel.losningspubliserer.AppKt")
 }
