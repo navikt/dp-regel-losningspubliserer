@@ -49,7 +49,7 @@ class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketLis
 
                 packet["@prosessertAv"] = "dp-regel-losningspubliserer"
 
-                context.publish(packet.toJson())
+                //TODO ("Kommenter inn") context.publish(packet.toJson())
             }
         } catch (e: Exception) {
             TODO("Not yet implemented")
