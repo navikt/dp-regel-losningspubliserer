@@ -10,7 +10,7 @@ internal class ApplicationBuilder(configuration: Map<String, String>) : RapidsCo
 
     init {
         rapidsConnection.register(this)
-        // TODO RegelLøsningAdapter(rapidsConnection)
+        RegelLøsningAdapter(rapidsConnection)
     }
 
     fun start() {

@@ -15,6 +15,7 @@ class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketLis
     companion object {
         val rapidFilter: River.() -> Unit = {
             validate { it.requireKey("minsteinntektResultat") }
+            // TODO filtrere vekk resultater som ikke har hatt @behov VurderMinsteInntekt    validate { it.requireKey("?") }
             validate { it.rejectValue("@prosessertAv", "dp-regel-losningspubliserer") }
         }
     }
@@ -44,12 +45,13 @@ class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketLis
         try {
             val behovId = packet["behovId"].asText()
             withLoggingContext("behovId" to behovId) {
+                logger.info("Mottok løsning for vurdering av minsteinntekt. BehovId: $behovId")
                 sikkerLogg.info("Mottok løsning for vurdering av minsteinntekt: ${packet.toJson()}")
                 // TODO("Mangler detaljer")
 
                 packet["@prosessertAv"] = "dp-regel-losningspubliserer"
 
-                //TODO ("Kommenter inn") context.publish(packet.toJson())
+                // TODO ("Kommenter inn") context.publish(packet.toJson())
             }
         } catch (e: Exception) {
             TODO("Not yet implemented")
