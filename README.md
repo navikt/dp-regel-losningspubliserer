@@ -1,6 +1,6 @@
 # dp-regel-losningspubliserer
 
-Oversetter løsninger fra topic regel.v1 og publiserer til rapid.v1
+Oversetter løsninger fra topic regel.v1 og publiserer til topic rapid.v1
 
 ## Komme i gang
 
