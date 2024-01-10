@@ -14,9 +14,10 @@ private val sikkerLogg = KotlinLogging.logger("tjenestekall")
 class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketListener {
     companion object {
         val rapidFilter: River.() -> Unit = {
-            validate { it.requireKey("minsteinntektResultat") }
+            validate { it.requireKey("behovId", "minsteinntektResultat") }
             // TODO filtrere vekk resultater som ikke har hatt @behov VurderMinsteInntekt    validate { it.requireKey("?") }
             validate { it.rejectValue("@prosessertAv", "dp-regel-losningspubliserer") }
+            validate { it.rejectKey("satsResultat", "grunnlagResultat", "periodeResultat") }
         }
     }
 
@@ -50,11 +51,11 @@ class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketLis
                 // TODO("Mangler detaljer")
 
                 packet["@prosessertAv"] = "dp-regel-losningspubliserer"
-
-                // TODO ("Kommenter inn") context.publish(packet.toJson())
+                context.publish(packet.toJson())
+                sikkerLogg.info("Videresendte løsning for vurdering av minsteinntekt: ${packet.toJson()}")
             }
         } catch (e: Exception) {
-            TODO("Not yet implemented")
+            println(e.message)
         }
     }
 }
