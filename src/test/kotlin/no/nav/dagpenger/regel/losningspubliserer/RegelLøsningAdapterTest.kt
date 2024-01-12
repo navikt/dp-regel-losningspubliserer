@@ -33,6 +33,8 @@ class RegelLøsningAdapterTest {
         testrapid.inspektør.message(0).let { message ->
             message["behovId"].asText() shouldBe "finBehovId"
             message["@løsning"].asText() shouldNotBe null
+            message["@event_name"].asText() shouldBe "behov"
+            message["@behov"] shouldNotBe null
             message["@prosessertAv"].asText() shouldBe "dp-regel-losningspubliserer"
         }
     }
@@ -46,6 +48,8 @@ class RegelLøsningAdapterTest {
                 "behovId": "ekstraFinBehovId",
                 "beregningsDato": "2019-02-27",
                 "minsteinntektResultat": { },
+                "@event_name": "behov",
+                "@behov": "VurderingAvMinsteInntekt",
                 "@løsning": {
                    "minsteinntektResultat": { }
                 },

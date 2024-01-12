@@ -49,6 +49,8 @@ class RegelLøsningAdapter(rapidsConnection: RapidsConnection) : River.PacketLis
                 logger.info("Mottok løsning for vurdering av minsteinntekt. BehovId: $behovId")
                 sikkerLogg.info("Mottok løsning for vurdering av minsteinntekt: ${packet.toJson()}")
 
+                packet["@event_name"] = "behov"
+                packet["@behov"] = listOf("VurderingAvMinsteInntekt")
                 packet["@løsning"] = mapOf("VurderingAvMinsteInntekt" to packet["minsteinntektResultat"])
                 packet["@prosessertAv"] = "dp-regel-losningspubliserer"
                 context.publish(behovId, packet.toJson())

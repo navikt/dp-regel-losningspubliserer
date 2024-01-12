@@ -25,12 +25,4 @@ internal object Configuration {
         properties.list().reversed().fold(emptyMap()) { map, pair ->
             map + pair.second
         }
-
-//    val azureAdClient by lazy {
-//        val azureAdConfig = OAuth2Config.AzureAd(properties)
-//        CachedOauth2Client(
-//            tokenEndpointUrl = azureAdConfig.tokenEndpointUrl,
-//            authType = azureAdConfig.clientSecret(),
-//        )
-//    }
 }
