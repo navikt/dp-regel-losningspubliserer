@@ -1,6 +1,7 @@
 package no.nav.dagpenger.regel.losningspubliserer
 
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import no.nav.helse.rapids_rivers.testsupport.TestRapid
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -31,6 +32,7 @@ class RegelLøsningAdapterTest {
         testrapid.inspektør.size shouldBe 1
         testrapid.inspektør.message(0).let { message ->
             message["behovId"].asText() shouldBe "finBehovId"
+            message["@løsning"].asText() shouldNotBe null
             message["@prosessertAv"].asText() shouldBe "dp-regel-losningspubliserer"
         }
     }
@@ -44,6 +46,9 @@ class RegelLøsningAdapterTest {
                 "behovId": "ekstraFinBehovId",
                 "beregningsDato": "2019-02-27",
                 "minsteinntektResultat": { },
+                "@løsning": {
+                   "minsteinntektResultat": { }
+                },
                 "@prosessertAv": "dp-regel-losningspubliserer"
             }
             """.trimIndent(),
@@ -60,8 +65,7 @@ class RegelLøsningAdapterTest {
                 "behovId": "ekstraFinBehovId",
                 "beregningsDato": "2019-02-27",
                 "minsteinntektResultat": { },
-                "periodeResultat": { },
-                "@prosessertAv": "dp-regel-losningspubliserer"
+                "periodeResultat": { }
             }
             """.trimIndent(),
         )
